@@ -2,7 +2,6 @@ import React from 'react'
 import GoogleMapReact from 'google-map-react';
 
 
-
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 class IncidentMarker extends React.Component {
@@ -24,16 +23,18 @@ class Gmap extends React.Component {
   };
 
   render() {
-    return (
-      <GoogleMapReact
-        defaultCenter={this.props.center}
-        defaultZoom={this.props.zoom}
-      >
-        <IncidentMarker lat={51.5074} lng={0.1278}/>
-        
-      </GoogleMapReact>
-    );
+	
+	    return (
+	      <GoogleMapReact
+	        defaultCenter={this.props.center}
+	        defaultZoom={this.props.zoom}
+	      >
+	        <IncidentMarker lat={51.5074} lng={0.1278}/>
+	        
+	      </GoogleMapReact>
+	    );
   }
+  
 }
 
 

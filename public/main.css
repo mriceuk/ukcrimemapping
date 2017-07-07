@@ -4,4 +4,18 @@
 
 #gmapwrap {
   width: 100%;
-  height: 600px; }
+  height: 400px; }
+
+.options-panel {
+  padding: 16px;
+  margin: 0px auto;
+  text-align: center; }
+  .options-panel #locationSelector {
+    width: 34%;
+    padding: 15px 10px 15px 10px;
+    font-size: 18px;
+    border: 1px solid #bdbdbd;
+    box-shadow: 0 0 0;
+    border-radius: 5px;
+    line-height: 14px;
+    height: 14px; }

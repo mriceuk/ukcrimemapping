@@ -1,52 +1,53 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { updateField } from '../actions'
+import { fetchCrimes, updateLocation } from '../actions'
 import Gmap from '../views/Gmap'
 
 class App extends Component {
-  static propTypes = {
-    changedInput: PropTypes.string.isRequired,
-    dispatch: PropTypes.func.isRequired
-  }
+
 
   componentDidMount() {
-    const { dispatch, changedInput } = this.props
+
+    const { dispatch, filters } = this.props
+ 	//this.props.dispatch( fetchCrimes() );	    
+ 	 
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.changedInput !== this.props.changedInput) {
-      const { dispatch, changedInput } = nextProps
+    if (nextProps.filters !== this.props.filters) {
+      const { dispatch, filters } = nextProps
     }
   }
 
-  handleChange = targetField => {
-    this.props.dispatch(updateField(targetField.target.value))
+  handleChange = locationField => {
+    this.props.dispatch(updateLocation(locationField.target.value))
+    
   }
-
+  
+  handleSubmit = location => {
+	
+	this.props.dispatch( fetchCrimes(this.props.filters.location) );
+	 
+  } 
+  
   render() {
 
-    const { changedInput } = this.props
     return (
       <div>
-        <p>
-          {changedInput}
-        </p>
-        <input type="text" name="name" value={changedInput} onChange={this.handleChange} placeholder="Full Name"/>
-       <div id='gmapwrap'><Gmap/></div>
+	  		<div className='options-panel'>
+		        <input id="locationSelector" type="text" name="name" placeholder="Postcode or Place name" onChange={this.handleChange} />
+		        <input type="button" name="button" value="submit" className="chunky-button" onClick={this.handleSubmit}/>
+	        </div>
+			<div id='gmapwrap'><Gmap/></div>
       </div>
     )
+    
   }
+  
 }
 
 const mapStateToProps = state => {
-
- 	const { changedInput } = state
-
-	return {
-	changedInput,
-	}
-
+ 	return state
 }
 
 export default connect(mapStateToProps)(App)

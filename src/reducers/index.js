@@ -1,17 +1,23 @@
 import { combineReducers } from 'redux'
-import { UPDATE_FIELD } from '../actions'
+import { REQUEST_CRIMES, RECEIVE_CRIMES, UPDATE_LOCATION } from '../actions'
 
-const changedInput = (state = "", action) => {
-  switch (action.type) {
-    case UPDATE_FIELD:
-      return action.fieldvalue
-    default:
-      return state
-  }
+const filters = (state = "", action) => {
+  	switch (action.type) {
+		case UPDATE_LOCATION:
+			return Object.assign({}, state, {
+		    	location: action.location
+		    })
+	    case REQUEST_CRIMES:
+	    	return Object.assign({}, state, {
+		    })
+	    default:
+	      return state
+	}
 }
 
+
 const combinedReducer = combineReducers({
-  changedInput
+  filters
 })
 
 export default combinedReducer
