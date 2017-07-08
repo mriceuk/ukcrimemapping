@@ -16,18 +16,27 @@ class IncidentMarker extends React.Component {
 
 
 class Gmap extends React.Component {
-	
-  static defaultProps = {
-    center: {lat: 51.5074, lng:  0.1278},
-    zoom: 11
-  };
+
+  constructor(props) {
+	  
+	  super(props);
+	  
+	  //defaults to london geocode, zoom level 11
+	  this.defaultCenter = { lat: 51.5074, lng:  0.1278 }
+	  this.zoom = this.props.zoom || 11
+	  
+  }
 
   render() {
-	
+	//console.log('rendering map');
+	//console.log( 'props center', this.props.center);
+	//console.log( 'new center', this.center);
+
 	    return (
 	      <GoogleMapReact
-	        defaultCenter={this.props.center}
-	        defaultZoom={this.props.zoom}
+	        defaultCenter={this.defaultCenter}
+	        defaultZoom={this.zoom}
+	        center={this.props.center}
 	      >
 	        <IncidentMarker lat={51.5074} lng={0.1278}/>
 	        

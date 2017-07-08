@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { REQUEST_CRIMES, RECEIVE_CRIMES, UPDATE_LOCATION } from '../actions'
+import { REQUEST_CRIMES, RECEIVE_CRIMES, UPDATE_LOCATION, UPDATE_GEOCODE } from '../actions'
 
 const filters = (state = "", action) => {
   	switch (action.type) {
@@ -10,8 +10,13 @@ const filters = (state = "", action) => {
 	    case REQUEST_CRIMES:
 	    	return Object.assign({}, state, {
 		    })
+		case UPDATE_GEOCODE:
+			console.log('reducer', action.geocode)
+			return Object.assign({}, state, {
+		    	geocode: action.geocode
+		    })			
 	    default:
-	      return state
+	    	return state
 	}
 }
 
