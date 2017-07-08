@@ -11,9 +11,13 @@ const filters = (state = "", action) => {
 	    	return Object.assign({}, state, {
 		    })
 		case UPDATE_GEOCODE:
-			console.log('reducer', action.geocode)
 			return Object.assign({}, state, {
 		    	geocode: action.geocode
+		    })	
+		case RECEIVE_CRIMES:
+
+			return Object.assign({}, state, {
+		    	crimes: action.crimes
 		    })			
 	    default:
 	    	return state

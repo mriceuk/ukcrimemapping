@@ -24,6 +24,7 @@ class Gmap extends React.Component {
 	  //defaults to london geocode, zoom level 11
 	  this.defaultCenter = { lat: 51.5074, lng:  0.1278 }
 	  this.zoom = this.props.zoom || 11
+	  console.log(this.props.crimes)
 	  
   }
 
