@@ -33,7 +33,7 @@ class App extends Component {
 
   	let locale = this.props.filters.location
   	let initialCoordinates = { lat: 51.5074, lng:  0.1278 }
-  	let initialZoom = 11
+  	let initialZoom = 12
   	
     return (
       <div>
@@ -41,7 +41,7 @@ class App extends Component {
 		        <input id="locationSelector" type="text" name="name" placeholder="Postcode or Place name" onChange={this.handleChange} />
 		        <input type="button" name="button" value="submit" className="chunky-button" onClick={this.handleSubmit}/>
 	        </div>
-			<div id='gmapwrap'><Gmap center={ this.props.filters.geocode } zoom={initialZoom} crimes={this.props.filters.crimes} /></div>
+			<div id='gmapwrap'><Gmap center={ this.props.filters.geocode } zoom={ initialZoom } crimes={this.props.filters.crimes} /></div>
       </div>
     )
     
