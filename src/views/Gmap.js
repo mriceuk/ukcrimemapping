@@ -2,18 +2,6 @@ import React from 'react'
 import GoogleMapReact from 'google-map-react';
 
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
-
-class IncidentMarker extends React.Component {
-	
-	render() {
-		return (
-			<div className="incident"> MyPlace</div>
-		)
-	}
-	
-}
-
 
 class Gmap extends React.Component {
 
@@ -23,39 +11,41 @@ class Gmap extends React.Component {
 	  
 	  //defaults to london geocode, zoom level 11
 	  this.defaultCenter = { lat: 51.5074, lng:  0.1278 }
-	  this.zoom = this.props.zoom || 11
-	  //.map( crime => crime.category)
+	  this.defaultZoom = 14
 
 	  
   }
 
   render() {
 		
-		if ( this.props.crimes ) {
-			
-			let incidents = this.props.crimes.map(function(crime) {
-				//<IncidentMarker lat={crime.location.latitude} lng={crime.location.longitude}/>
-				return (<p>test</p>)
+		var incidents = [];
+		
+		if ( this.props.crimes ) {	
+	
+			this.props.crimes.forEach(function(crime, i) {
+				if (i > 99) { return }
+			  incidents.push(<span className='incident' lat={crime.location.latitude} lng={crime.location.longitude} key={i}></span>);
+
 			});
-			console.log(incidents)
 			
 		}
-	  	
-		//console.log('rendering map');
-		//console.log( 'props center', this.props.center);
-		//console.log( 'new center', this.center);
+		
+		//alert(this.zoom);
+		
+    return (
+      <GoogleMapReact
+        defaultCenter={this.defaultCenter}
+        defaultZoom={this.defaultZoom}
+        center={this.props.center}
 
-//<IncidentMarker lat={51.5074} lng={0.1278}/>
-	    return (
-	      <GoogleMapReact
-	        defaultCenter={this.defaultCenter}
-	        defaultZoom={this.zoom}
-	        center={this.props.center}
-	      >
-	        
-	        
-	      </GoogleMapReact>
-	    );
+      >
+      
+      {incidents}
+        
+      </GoogleMapReact>
+    );
+    
+    
   }
   
 }

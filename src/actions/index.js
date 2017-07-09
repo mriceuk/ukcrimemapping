@@ -10,11 +10,6 @@ export const requestCrimes = location => ({
   location
 })
 
-export const receiveCrimes = crimes => ({
-  type: RECEIVE_CRIMES,
-  crimes
-})
-
 export const updateLocation = location => ({
   type: UPDATE_LOCATION,
   location
@@ -27,12 +22,22 @@ export const updateGeocode = geocode => ({
 
 })
 
+function receiveCrimes(crimes, status) {
+	
+	return {
+	  type: RECEIVE_CRIMES,
+	  crimes,
+	  status
+  }
+  
+}
+
 export function getCrimes(location) {
 	
 	return dispatch => {
 		
 		//geocode address string using google's api
-		axios.get("https://maps.googleapis.com/maps/api/geocode/json?address="+location+"&key=AIzaSyB8naUAUnxu8HaMA0z5v5VJt5w_rXUQu6g")
+		axios.get("https://maps.googleapis.com/maps/api/geocode/json?address="+location+"&key=AIzaSyB8naUAUnxu8HaMA0z5v5VJt5w_rXUQu6g&region=UK")
 		.then(function (response) {
 			  
 			let newGeocode = response.data.results[0].geometry.location;
@@ -42,8 +47,8 @@ export function getCrimes(location) {
 			axios.get("https://data.police.uk/api/crimes-street/all-crime?lat="+newGeocode.lat+"&lng="+newGeocode.lng+"&date=2013-01")
 			.then(function (response) {
 				
-				//dispatch action to send crimes objects to reducer, then to props crimes
-				dispatch(receiveCrimes(response.data))
+				//send crimes data to Gmap
+				dispatch( receiveCrimes(response.data, 'location: ' + location + ' | results: ' + response.data.length + ' | displaying 1-100') )
 				
 			})
 			

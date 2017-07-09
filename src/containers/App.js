@@ -8,9 +8,6 @@ class App extends Component {
 
   componentDidMount() {
     const { dispatch, filters } = this.props
-    
-    this.geocode = { lat: 51.5074, lng:  0.1278 }
-    
   }
 
   componentWillReceiveProps(nextProps) {
@@ -31,17 +28,31 @@ class App extends Component {
   
   render() {
 
-  	let locale = this.props.filters.location
   	let initialCoordinates = { lat: 51.5074, lng:  0.1278 }
-  	let initialZoom = 12
   	
     return (
       <div>
 	  		<div className='options-panel'>
-		        <input id="locationSelector" type="text" name="name" placeholder="Postcode or Place name" onChange={this.handleChange} />
-		        <input type="button" name="button" value="submit" className="chunky-button" onClick={this.handleSubmit}/>
-	        </div>
-			<div id='gmapwrap'><Gmap center={ this.props.filters.geocode } zoom={ initialZoom } crimes={this.props.filters.crimes} /></div>
+		      <input id="locationSelector" type="text" name="name" placeholder="Postcode or Place name" onChange={this.handleChange} />
+		      <select name='year'>
+		      	<option>2017</option>
+		      	<option>2016</option>
+		      	<option>2015</option>
+		      	<option>2014</option>
+		      	<option>2013</option>
+		      	<option>2012</option>
+		      </select>
+		      <select name='month'>
+		      	<option>12</option>
+		      	<option>11</option>
+		      	<option>10</option>
+		      	<option>9</option>
+		      	<option>8</option>
+		      </select>
+		      <input type="button" name="button" value="submit" className="chunky-button" onClick={this.handleSubmit}/>
+		      <div className='status'>{this.props.filters.status}</div>
+	    </div>
+			<div id='gmapwrap'><Gmap center={ this.props.filters.geocode }  crimes={this.props.filters.crimes} /></div>
       </div>
     )
     

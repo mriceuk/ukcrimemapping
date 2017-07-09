@@ -9,6 +9,7 @@ const filters = (state = "", action) => {
 		    })
 	    case REQUEST_CRIMES:
 	    	return Object.assign({}, state, {
+		    	
 		    })
 		case UPDATE_GEOCODE:
 			return Object.assign({}, state, {
@@ -17,7 +18,8 @@ const filters = (state = "", action) => {
 		case RECEIVE_CRIMES:
 
 			return Object.assign({}, state, {
-		    	crimes: action.crimes
+		    	crimes: action.crimes,
+		    	status: action.status
 		    })			
 	    default:
 	    	return state
