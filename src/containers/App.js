@@ -38,15 +38,15 @@ class App extends Component {
   
   render() {
 
-  	let initialCoordinates = { lat: 51.5074, lng:  0.1278 }
+  	let initialCoordinates = { lat: 51.5073509, lng:  -0.1277583 }
   	
     return (
       <div>
 	  		<div className='options-panel'>
 		      <input id="options-panel--locationSelector" type="text" name="name" placeholder="Postcode or Place name" onChange={this.handleChange} />
 		      <select id='options-panel--year' name='year' onChange={this.handleChange}>
-		      	<option>2017</option>
-		      	<option>2016</option>
+		      	<option selected="selected">2017</option>
+		      	<option >2016</option>
 		      	<option>2015</option>
 		      	<option>2014</option>
 		      	<option>2013</option>
@@ -61,8 +61,8 @@ class App extends Component {
 		      	<option>8</option>
 		      	<option>7</option>
 		      	<option>6</option>	
-		      	<option>5</option>	
-		      	<option>4</option>		
+		      	<option >5</option>	
+		      	<option selected="selected">4</option>		
 		      	<option>3</option>		
 		      	<option>2</option>		
 		      	<option>1</option>			      		      		      		      			      		      			      	

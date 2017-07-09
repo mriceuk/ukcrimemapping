@@ -10,7 +10,7 @@ class Gmap extends React.Component {
 	  super(props);
 	  
 	  //defaults to london geocode, zoom level 11
-	  this.defaultCenter = { lat: 51.5074, lng:  0.1278 }
+	  this.defaultCenter = { lat: 51.5073509, lng:  -0.1277583 }
 	  this.defaultZoom = 14
 
 	  
