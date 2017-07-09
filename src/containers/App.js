@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getCrimes, updateFilters, updateGeocode } from '../actions'
+import { getCrimes, updateFilters, updateStatus } from '../actions'
 import Gmap from '../views/Gmap'
 
 
@@ -14,44 +14,52 @@ class LocationSelector extends Component {
 	}
 };
 
+
 class MonthSelector extends Component {
+	
+	listYears() {
+		
+		const currentYear = new Date().getFullYear();
+		const startYear = 1980;		
+		var years = [];
+		var i;
+
+		years.push(<option value='' key='0'>Year</option>)
+		for ( i=currentYear; i >= startYear; i-- ) {
+			years.push(<option key={i}>{i}</option>);
+	    }
+	    return years;
+	    
+	}
+	
+	
+	listMonths() {
+		
+		const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+		var monthsOptions = [];
+		monthsOptions.push(<option value='' key='0'>Month</option>)
+		months.forEach(function(item, index) {
+			monthsOptions.push(<option value={index} key={index+1}>{item}</option>)
+		});
+		return monthsOptions;
+		
+	}
+	
 	
 	render() {
 		
-		let currentYear = new Date().getFullYear();
-		let years = [];
-		let startYear = 1980;
-
-        while ( currentYear > startYear ) {
-                    years.push(startYear--);
-        } 
-        console.log(years);
-		
 		return (
+			
 			<div className='month-selector'>
+
 				<select id='options-panel--year' name='year' onChange={this.props.handleChange} >
-			      	<option selected="selected">2017</option>
-			      	<option >2016</option>
-			      	<option>2015</option>
-			      	<option>2014</option>
-			      	<option>2013</option>
-			      	<option>2012</option>
-			      </select>
+			      	{this.listYears()}
+			    </select>
 			      
-			      <select id='options-panel--month' name='month' onChange={this.props.handleChange} >
-			      	<option>12</option>
-			      	<option>11</option>
-			      	<option>10</option>
-			      	<option>9</option>
-			      	<option>8</option>
-			      	<option>7</option>
-			      	<option>6</option>	
-			      	<option >5</option>	
-			      	<option selected="selected">4</option>		
-			      	<option>3</option>		
-			      	<option>2</option>		
-			      	<option>1</option>			      		      		      		      			      		      			      	
+			    <select id='options-panel--month' name='month' onChange={this.props.handleChange} >
+			    	{this.listMonths()}			      		      		      		      			      		      			      	
 				</select>
+			
 			</div>
 		)
 		
@@ -59,17 +67,12 @@ class MonthSelector extends Component {
 	
 };
 
-class App extends Component {
 
-  componentDidMount() {
-    const { dispatch, filters } = this.props
-  }
+class App extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.filters !== this.props.filters) {
-      const { dispatch, filters } = nextProps
       this.geocode = this.props.filters.geocode
-
     }
   }
 
@@ -83,7 +86,12 @@ class App extends Component {
   }
   
   handleSubmit = event => {
-	  
+	
+	if ( document.getElementById('options-panel--year').value === '' || document.getElementById('options-panel--month').value === '' ) {
+		this.props.dispatch( updateStatus('Select Month') )
+		return false;
+	}
+ 
 	this.props.dispatch( getCrimes( { 
 		location: this.props.filters.location, 
 		month: this.props.filters.month, 
@@ -96,12 +104,12 @@ class App extends Component {
 
     return (
 	   
-      <form onchange>
+      <form >
       		
 	  	<div className='options-panel'>
 	  		
   			<LocationSelector handleChange={this.handleChange}/>
-  			<MonthSelector handleChange={this.handleChange}/>
+  			<MonthSelector handleChange={this.handleChange}/> 
 			<input type="button" name="button" value="submit" onClick={this.handleSubmit}/>
 			<div className='status'>{this.props.filters.status}</div>
 				

@@ -5,18 +5,12 @@ import GoogleMapReact from 'google-map-react';
 
 class Gmap extends React.Component {
 
-  constructor(props) {
-	  
-	  super(props);
-	  
-	  //defaults to london geocode, zoom level 11
-	  this.defaultCenter = { lat: 51.5073509, lng:  -0.1277583 }
-	  this.defaultZoom = 14
-
-	  
-  }
 
   render() {
+	  
+	  	//defaults to london geocode, zoom level 11
+		const defaultCenter = { lat: 51.5073509, lng:  -0.1277583 }
+		const defaultZoom = 14
 		
 		var incidents = [];
 		
@@ -30,16 +24,13 @@ class Gmap extends React.Component {
 			
 		}
 		
-		//alert(this.zoom);
-		
     return (
       <GoogleMapReact
-        defaultCenter={this.defaultCenter}
-        defaultZoom={this.defaultZoom}
+        defaultCenter={defaultCenter}
+        defaultZoom={defaultZoom}
         center={this.props.center}
-
       >
-      
+	  
       {incidents}
         
       </GoogleMapReact>
@@ -49,6 +40,7 @@ class Gmap extends React.Component {
   }
   
 }
+
 
 
 export default Gmap;

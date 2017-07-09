@@ -4,6 +4,7 @@ export const REQUEST_CRIMES = 'RETRIEVE_CRIMES'
 export const RECEIVE_CRIMES = 'RECEIVE_CRIMES'
 export const UPDATE_FILTERS = 'UPDATE_LOCATION'
 export const UPDATE_GEOCODE = 'UPDATE_GEOCODE'
+export const UPDATE_STATUS = 'UPDATE_STATUS'
 
 export const requestCrimes = location => ({
   type: REQUEST_CRIMES,
@@ -22,6 +23,13 @@ export const updateGeocode = geocode => ({
 	type: UPDATE_GEOCODE,
 	geocode
 
+})
+
+export const updateStatus = msg => ({
+	
+	type: UPDATE_STATUS,
+	msg
+	
 })
 
 function receiveCrimes(crimes, status) {
