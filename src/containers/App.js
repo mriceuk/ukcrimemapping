@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getCrimes, updateLocation, updateGeocode } from '../actions'
+import { getCrimes, updateFilters, updateGeocode } from '../actions'
 import Gmap from '../views/Gmap'
 
 class App extends Component {
@@ -18,12 +18,22 @@ class App extends Component {
     }
   }
 
-  handleChange = locationField => {
-    this.props.dispatch( updateLocation(locationField.target.value) )
+  handleChange = event => {
+    this.props.dispatch( updateFilters({
+	    location: document.getElementById('options-panel--locationSelector').value,
+	    year: document.getElementById('options-panel--year').value,
+		month: document.getElementById('options-panel--month').value
+	}) )
   }
   
-  handleSubmit = location => {
-	this.props.dispatch( getCrimes( this.props.filters.location ) )
+  handleSubmit = event => {
+	  
+	this.props.dispatch( getCrimes( { 
+		location: this.props.filters.location, 
+		month: this.props.filters.month, 
+		year: this.props.filters.year  
+	} ) )
+	
   } 
   
   render() {
@@ -33,21 +43,29 @@ class App extends Component {
     return (
       <div>
 	  		<div className='options-panel'>
-		      <input id="locationSelector" type="text" name="name" placeholder="Postcode or Place name" onChange={this.handleChange} />
-		      <select name='year'>
+		      <input id="options-panel--locationSelector" type="text" name="name" placeholder="Postcode or Place name" onChange={this.handleChange} />
+		      <select id='options-panel--year' name='year' onChange={this.handleChange}>
 		      	<option>2017</option>
 		      	<option>2016</option>
 		      	<option>2015</option>
 		      	<option>2014</option>
 		      	<option>2013</option>
 		      	<option>2012</option>
+		      	
 		      </select>
-		      <select name='month'>
+		      <select id='options-panel--month' name='month' onChange={this.handleChange}>
 		      	<option>12</option>
 		      	<option>11</option>
 		      	<option>10</option>
 		      	<option>9</option>
 		      	<option>8</option>
+		      	<option>7</option>
+		      	<option>6</option>	
+		      	<option>5</option>	
+		      	<option>4</option>		
+		      	<option>3</option>		
+		      	<option>2</option>		
+		      	<option>1</option>			      		      		      		      			      		      			      	
 		      </select>
 		      <input type="button" name="button" value="submit" className="chunky-button" onClick={this.handleSubmit}/>
 		      <div className='status'>{this.props.filters.status}</div>
