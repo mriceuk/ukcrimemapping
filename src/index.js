@@ -9,7 +9,7 @@ import App from './containers/App'
 
 
 const middleware = [ thunk ]
-//logging if needed
+
 //if (process.env.NODE_ENV !== 'production') {
   //middleware.push(createLogger())
 //}

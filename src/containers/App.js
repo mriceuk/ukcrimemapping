@@ -20,7 +20,7 @@ class MonthSelector extends Component {
 	listYears() {
 		
 		const currentYear = new Date().getFullYear();
-		const startYear = 1980;		
+		const startYear = 2011;		
 		var years = [];
 		var i;
 
@@ -51,14 +51,14 @@ class MonthSelector extends Component {
 		return (
 			
 			<div className='month-selector'>
+			
+				<select id='options-panel--month' name='month' onChange={this.props.handleChange} >
+			    	{this.listMonths()}			      		      		      		      			      		      			      	
+				</select>
 
 				<select id='options-panel--year' name='year' onChange={this.props.handleChange} >
 			      	{this.listYears()}
 			    </select>
-			      
-			    <select id='options-panel--month' name='month' onChange={this.props.handleChange} >
-			    	{this.listMonths()}			      		      		      		      			      		      			      	
-				</select>
 			
 			</div>
 		)
@@ -88,7 +88,7 @@ class App extends Component {
   handleSubmit = event => {
 	
 	if ( document.getElementById('options-panel--year').value === '' || document.getElementById('options-panel--month').value === '' ) {
-		this.props.dispatch( updateStatus('Select Month') )
+		this.props.dispatch( updateStatus('Please select a Month and Year') )
 		return false;
 	}
  

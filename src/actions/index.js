@@ -25,10 +25,10 @@ export const updateGeocode = geocode => ({
 
 })
 
-export const updateStatus = msg => ({
+export const updateStatus = status => ({
 	
 	type: UPDATE_STATUS,
-	msg
+	status
 	
 })
 
@@ -52,7 +52,7 @@ export function getCrimes(filters) {
 			  
 			let newGeocode = response.data.results[0].geometry.location;
 			dispatch( updateGeocode( newGeocode ) );
-			  
+			dispatch( updateStatus('Loading...') )  
 			//obtain crime data using newly acquired lat & lng values
 			axios.get("https://data.police.uk/api/crimes-street/all-crime?lat="+newGeocode.lat+"&lng="+newGeocode.lng+"&date="+filters.year+"-"+filters.month)
 			.then(function (response) {
